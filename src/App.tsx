@@ -1,9 +1,10 @@
+import { MainLayout } from "./layout/MainLayout"
 
 function App() {
 
   return (
-    <div className="text-2xl font-bold text-red-950">
-      <h1>Aurora Care</h1>
+    <div className="max-h-screen w-full">
+      <MainLayout />
     </div>
   )
 }
