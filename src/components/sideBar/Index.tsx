@@ -8,18 +8,23 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { LuHistory } from "react-icons/lu";
 import AuroraBirth from "/Aurora-Care.png"
 import { BsReverseLayoutSidebarReverse } from "react-icons/bs";
+import { FiLogOut } from "react-icons/fi";
 
 
 
 
 
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 export const SideBar = () => {
   const location = useLocation();
   const [monitorOpen, setMonitorOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-    const [showLogoText, setShowLogoText] = useState(true);
+  const [showLogoText, setShowLogoText] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
 
   // Handle logo text transition with delay
   const handleCollapse = () => {
@@ -34,6 +39,16 @@ export const SideBar = () => {
       setShowLogoText(false);
     }
   };
+
+  const handleReset = () => {
+    localStorage.removeItem("userData");
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/");
+      window.location.reload();
+    }, 2000);
+  }
   const sideBarOptions = [
     {
       label: "Dashboard",
@@ -72,23 +87,38 @@ export const SideBar = () => {
   return (
     <div className={`h-full bg-white flex flex-col gap-6 justify-between border-r border-gray-200 px-2 transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
       <div className={`font-bold text-xl text-[#2a3883] flex items-center justify-between py-2 px-2`}>
-        <div className="flex items-center gap-2">
+        <div
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          className="flex items-center gap-2">
           {!collapsed ? (
             <>
               <img src={AuroraBirth} alt="" className="object-cover w-12 h-12" />
               {showLogoText && <span className="ml-1">Aurora Care</span>}
             </>
           ) : (
-            <span className="text-2xl font-extrabold">AC</span>
+            <>
+              {!isHovering ? <img src={AuroraBirth} alt="" className={`object-cover w-10 h-10`} /> : <button
+                className="ml-2 p-2 rounded hover:bg-gray-100 cursor-pointer"
+                onClick={handleCollapse}
+                aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              >
+                <BsReverseLayoutSidebarReverse className={`transition-transform`} size={'23.3px'} />
+              </button>}
+            </>
           )}
         </div>
-        <button
-          className="ml-2 p-2 rounded hover:bg-gray-100"
-          onClick={handleCollapse}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          <BsReverseLayoutSidebarReverse className={`transition-transform`} />
-        </button>
+        {
+          !collapsed && (
+            <button
+              className="ml-2 p-2 rounded hover:bg-gray-100 cursor-pointer"
+              onClick={handleCollapse}
+              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            >
+              <BsReverseLayoutSidebarReverse className={`transition-transform`} />
+            </button>
+          )
+        }
       </div>
       <div className="flex-1 flex gap-2 flex-col items-center">
         {sideBarOptions.map(option => {
@@ -115,7 +145,7 @@ export const SideBar = () => {
                         className={`flex items-center gap-2 py-2 px-2 rounded-lg border-2  hover:bg-[#fcf2fa] ${location.pathname === sub.link ? "bg-[#fcf2fa] text-[#8d4ed6] border-2 border-[#f0e2fe]" : "text-black border-white"}`}
                       >
                         {sub.icon}
-                       {!collapsed && <span>{sub.label}</span>}
+                        {!collapsed && <span>{sub.label}</span>}
                       </Link>
                     ))}
                   </div>
@@ -135,12 +165,12 @@ export const SideBar = () => {
           );
         })}
       </div>
-      <div className="p-4 w-full flex justify-center">
-        {!collapsed && (
-          <ul>
-            <li className="text-gray-500 cursor-pointer hover:text-[#8d4ed6]">Logout</li>
-          </ul>
-        )}
+      <div className={`w-full flex items-center gap-3 px-2 py-3 font-medium text-[#e11768] cursor-pointer hover:bg-[#fcf2fa] mb-2 rounded-lg ${collapsed && "justify-center"}`} onClick={handleReset}>
+        {loading ? <svg className="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg> : <FiLogOut size={20} />}
+        {!collapsed && (<span className="flex"> Logout</span>)}
       </div>
     </div>
   );
