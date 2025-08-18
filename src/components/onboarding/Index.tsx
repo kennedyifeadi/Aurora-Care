@@ -79,7 +79,7 @@ export const Onboarding = ({ onComplete }: OnboardingProps) => {
           <p className="text-xs text-gray-500 mt-1">In case of emergencies.</p>
         </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button type="submit" className="w-full bg-[#8d4ed6] text-white py-2 rounded-lg font-semibold flex justify-center items-center cursor-pointer" disabled={loading}>
+        <button type="submit" className={`w-full bg-[#8d4ed6] text-white py-2 rounded-lg font-semibold flex justify-center items-center ${loading ? "cursor-not-allowed" : "cursor-pointer"}`} disabled={loading}>
           {loading ? (
             <span className="flex items-center justify-center w-full">
               <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
