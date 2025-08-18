@@ -45,7 +45,7 @@ export const SideBar = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      navigate("/");
+      navigate("/dashboard");
       window.location.reload();
     }, 2000);
   }
