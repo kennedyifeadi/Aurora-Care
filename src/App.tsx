@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Onboarding } from "./components/onboarding/index";
+import { Onboarding } from "./components/onboarding/Index";
 import { MainLayout } from "./layout/MainLayout";
 
 function App() {

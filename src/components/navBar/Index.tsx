@@ -1,17 +1,29 @@
+
 import { useEffect } from "react";
-import { SearchBar } from "./SearchBar"
+import { SearchBar } from "./SearchBar";
 import { RiNotification2Line } from "react-icons/ri";
+import { FiMenu } from "react-icons/fi";
+import { useSidebar } from "../../context/SidebarContext";
 
 export const TopNav = () => {
   const user = localStorage.getItem("userData");
   const userData = user ? JSON.parse(user) : null;
   const initials = userData ? userData[0].trim().split(" ") : ['U', 'U'];
   const fullName = userData ? userData[0] : 'User';
+  const { openSidebar, isOpen } = useSidebar();
   useEffect(() => {
-   console.log("User Data:", userData);
+    console.log("User Data:", userData);
   }, [userData]);
   return (
-    <div className="w-full h-16 border-b border-gray-200 flex items-center justify-between px-4">
+    <div className="w-full h-16 border-b border-gray-200 flex items-center justify-between px-4 relative">
+      {/* Mobile menu icon */}
+      <div className="lg:hidden flex items-center mr-2">
+        {!isOpen && (
+          <button onClick={openSidebar} aria-label="Open sidebar">
+            <FiMenu size={28} className="text-[#2a3883]" />
+          </button>
+        )}
+      </div>
       <SearchBar />
       <div className="flex gap-5">
         <div className="bg-[#f9fafb] rounded-lg border border-gray-200 cursor-pointer flex justify-center items-center h-10 w-10">
@@ -25,5 +37,5 @@ export const TopNav = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
