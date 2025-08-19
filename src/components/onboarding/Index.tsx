@@ -44,7 +44,7 @@ export const Onboarding = ({ onComplete }: OnboardingProps) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-md relative h-[70dvh] overflow-auto">
+    <div className="bg-white rounded-xl shadow-xl p-8 w-[90%] md:w-full max-w-md relative h-[70dvh] overflow-auto">
       <h2 className="text-2xl font-bold text-[#8d4ed6] text-center">Welcome to AuroraCare</h2>
       <p className="mb-2 text-gray-600 text-center">Please provide the following details to get started</p>
       <form onSubmit={handleSubmit} className="space-y-4">
