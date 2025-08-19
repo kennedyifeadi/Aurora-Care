@@ -10,6 +10,7 @@ export const TopNav = () => {
   const userData = user ? JSON.parse(user) : null;
   const initials = userData ? userData[0].trim().split(" ") : ['U', 'U'];
   const fullName = userData ? userData[0] : 'User';
+  const truncatedName = fullName.length > 10 ? fullName.slice(0, 10) + '...' : fullName;
   const { openSidebar, isOpen } = useSidebar();
   useEffect(() => {
     console.log("User Data:", userData);
@@ -30,7 +31,9 @@ export const TopNav = () => {
           <RiNotification2Line className="text-gray-500" size={20} />
         </div>
         <div className="flex w-max h-full gap-2 justify-center items-center">
-          <h1 className="font-medium text-[18px] capitalize">{fullName}</h1>
+          {/* Mobile: truncated, Desktop: full name */}
+          <h1 className="font-medium text-[14px] md:text-[18px] capitalize block lg:hidden">{truncatedName}</h1>
+          <h1 className="font-medium text-[14px] md:text-[18px] capitalize hidden lg:block">{fullName}</h1>
           <span className="rounded-full h-10 w-10 bg-[#d87cdc] text-white uppercase font-medium text-[18px] flex justify-center items-center">
             {(initials[0]?.[0]) + (initials[1]?.[0] || '')}
           </span>
