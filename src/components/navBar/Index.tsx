@@ -16,7 +16,7 @@ export const TopNav = () => {
     console.log("User Data:", userData);
   }, [userData]);
   return (
-    <div className="w-full h-16 border-b border-gray-200 flex items-center justify-between px-4 relative">
+    <div className="w-full h-[8%] border-b border-gray-200 flex items-center justify-between px-4 relative">
       {/* Mobile menu icon */}
       <div className="lg:hidden flex items-center mr-2">
         {!isOpen && (

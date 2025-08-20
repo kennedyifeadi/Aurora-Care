@@ -7,7 +7,8 @@ import { History } from "../pages/History";
 
 export const MainRoute = () => {
   return (
-    <Routes>
+    <div className="w-full h-[92%]">
+      <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/monitor" element={<Navigate to="/monitor/mother" replace />} />
@@ -16,5 +17,6 @@ export const MainRoute = () => {
       <Route path="/plan" element={<Plan />} />
       <Route path="/history" element={<History />} />
     </Routes>
+    </div>
   );
 }

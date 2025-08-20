@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div className="max-h-screen w-full relative">
+    <div className="max-h-screen w-full relative h-screen">
       <div className={showOnboarding ? "blur-sm pointer-events-none" : ""}>
         <MainLayout />
       </div>

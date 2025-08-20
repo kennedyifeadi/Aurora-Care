@@ -7,11 +7,13 @@ import { SidebarProvider } from "../context/SidebarContext";
 export const MainLayout = () => {
   return (
     <SidebarProvider>
-      <div className="flex max-h-screen w-full h-screen ">
+      <div className="flex w-full h-screen">
         <SideBar />
-        <div className="flex-1 h-full flex flex-col">
+        <div className="flex-1 h-full flex flex-col overflow-hidden">
           <TopNav />
-          <MainRoute />
+          <div className="flex-1 overflow-y-auto">
+            <MainRoute />
+          </div>
         </div>
       </div>
     </SidebarProvider>
