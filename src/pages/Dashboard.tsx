@@ -51,15 +51,15 @@ const Dashboard = () => {
 		<div className="w-full flex flex-col gap-4 pt-4 px-4">
 			<div className="w-full h-max flex justify-between items-center">
 				<div>
-					<h1 className="capitalize font-medium text-[36px]">Hello {trimmedName[0]} 👋</h1>
-					<span>{message}</span>
+					<h1 className="capitalize font-medium text-[18px] md:text-[36px]">Hello {trimmedName[0]} 👋</h1>
+					<span className="text-gray-600 text-[12px] md:text-[14px]">{message}</span>
 				</div>
 				<div className="w-max h-10 rounded-lg">
-					<button className="w-full h-full gap-2 px-2 rounded-lg text-white font-medium flex border-2 border-green-700 justify-center items-center bg-green-600 active:scale-90 duration-200 ease-in-out cursor-pointer " onClick={() => {window.alert("Data Shared!")}}>Share Data <BsSend className="text-white font-bold" />
+					<button className="w-full text-[12px] md:text-[14px] h-full gap-2 px-2 rounded-lg text-white font-medium flex border-2 border-green-700 justify-center items-center bg-green-600 active:scale-90 duration-200 ease-in-out cursor-pointer " onClick={() => {window.alert("Data Shared!")}}>Share Data <BsSend className="text-white font-bold" />
 					</button>
 				</div>
 			</div>
-			<div className="h-[150dvh]">
+			<div className="w-full h-max">
 				<ChildSnapshot />
 			</div>
 			<div>
