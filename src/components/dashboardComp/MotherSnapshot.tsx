@@ -7,7 +7,12 @@ export const MotherSnapshot = () => {
                 <p className="text-gray-600">Details about your health and development.</p>
             </div>
             <div className="h-max w-full flex gap-8 flex-wrap">
-                <div className="w-[360px] h-[300px] rounded-xl bg-white hover:shadow-md border border-gray-200 "></div>
+                <div className="w-[360px] h-[300px] rounded-xl bg-white hover:shadow-md border border-gray-200 ">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
                 <div className="w-[360px] h-[300px] rounded-xl bg-white hover:shadow-md border border-gray-200 "></div>
                 <div className="w-[360px] h-[300px] rounded-xl bg-white hover:shadow-md border border-gray-200 "></div>
             </div>
