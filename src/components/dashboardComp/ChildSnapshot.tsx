@@ -110,9 +110,9 @@ export const ChildSnapshot = () => {
                         <div className="w-full h-[60px] bg-[#fcf2fa] border-2 border-[#f0e2fe] rounded-md flex gap-2 items-center px-2" >
                             <span className="flex justify-center items-center h-max p-2 rounded-full text-[#7e22ce] bg-[#f3e8ff]"><LuClock3 /></span>
                             <span className="flex flex-col">
-                                        <span className="text-[14px] font-medium text-[#7e22ce]">Estimated Delivery window</span>
-                                        <span className="text-[12px] text-[#7e22ce] font-light">4/15/2026 - 4/29/2026</span>
-                                    </span>
+                                <span className="text-[14px] font-medium text-[#7e22ce]">Estimated Delivery window</span>
+                                <span className="text-[12px] text-[#7e22ce] font-light">4/15/2026 - 4/29/2026</span>
+                            </span>
                         </div>
                     </div>
                 </div>
