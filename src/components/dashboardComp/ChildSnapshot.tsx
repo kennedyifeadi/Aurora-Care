@@ -49,7 +49,7 @@ export const ChildSnapshot = () => {
                 <h2 className="font-medium text-lg">Child Snapshot 👶</h2>
                 <p className="text-gray-600">Details about your child's health and development.</p>
             </div>
-            <div className="h-max w-full flex gap-8 flex-wrap justify-center">
+            <div className="h-max w-full flex gap-8 flex-wrap justify-center md:justify-start">
                 <div className="w-[380px] md:w-[500px] h-[300px] md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 ">
                     <div className="flex justify-between">
                         <span className="flex items-center gap-2 text-[18px] font-medium">
