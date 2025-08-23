@@ -41,10 +41,6 @@ export const ChildSnapshot = () => {
             time: "2:00 PM",
             date: "Jan 15, 2026"
         },
-        // {
-        //     message: "Extimated Delivery window",
-        //     date: "4/15/2026 - 4/29/2026"
-        // }
     ]
 
     return (
@@ -53,8 +49,8 @@ export const ChildSnapshot = () => {
                 <h2 className="font-medium text-lg">Child Snapshot 👶</h2>
                 <p className="text-gray-600">Details about your child's health and development.</p>
             </div>
-            <div className="h-max w-full flex gap-8 flex-wrap">
-                <div className="w-[360px] md:w-[500px] h-[300px] md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 ">
+            <div className="h-max w-full flex gap-8 flex-wrap justify-center">
+                <div className="w-[380px] md:w-[500px] h-[300px] md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 ">
                     <div className="flex justify-between">
                         <span className="flex items-center gap-2 text-[18px] font-medium">
                             Baby's HeartBeat
@@ -83,7 +79,7 @@ export const ChildSnapshot = () => {
                         </p>
                     </div>
                 </div>
-                <div className="w-[360px] md:w-[500px] h-max md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 ">
+                <div className="w-[380px] md:w-[500px] h-max md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 ">
                     <div className="flex justify-between">
                         <span className="flex items-center gap-2 text-[18px] font-medium">
                             Upcoming Checkups

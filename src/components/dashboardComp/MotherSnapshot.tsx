@@ -25,7 +25,7 @@ export const MotherSnapshot = () => {
         const shortMessage = currentHeartBeat < 60 ? "low" : currentHeartBeat > 120 ? "high" : "stable";
         const contractionMessage = currentContractions < 5 ? "your contractions are low, see a doctor" : currentContractions > 10 ? "your contractions are high, see a doctor" : "your contractions are in stable condition";
         const shortContractionMessage = currentContractions < 5 ? "low" : currentContractions > 10 ? "high" : "stable";
-        const cervicalDilationMessage = currentCervicalDilation < 3 ? "your cervical dilation is low, you should see a doctor" : currentCervicalDilation > 7 ? "your cervical dilation is high, you should see a doctor" : "your cervical dilation is in stable condition";
+        const cervicalDilationMessage = currentCervicalDilation < 3 ? "your dilation is low, see a doctor" : currentCervicalDilation > 7 ? "your dilation is high, see a doctor" : "your dilation is in stable condition";
         const shortCervicalDilationMessage = currentCervicalDilation < 3 ? "low" : currentCervicalDilation > 7 ? "high" : "stable";
         setMessage(message);
         setShortMessage(shortMessage);
