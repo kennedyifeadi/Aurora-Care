@@ -42,7 +42,7 @@ export const MotherSnapshot = () => {
             </div>
             <div className="h-max w-full flex justify-center items-center gap-4 flex-wrap md:flex-nowrap">
                 {/* Heartbeat Card */}
-                <div className="w-[380px] md:w-[400px] h-[300px] md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 flex-shrink-0">
+                <div className="w-[380px] md:w-[400px] h-max md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4">
                     <div className="flex justify-between">
                         <span className="flex items-center gap-2 text-[18px] font-medium">
                             Mother's HeartBeat
@@ -66,13 +66,13 @@ export const MotherSnapshot = () => {
                         <MotherHeartBeatChart />
                     </div>
                     <div>
-                        <p className="flex">
-                            {message} | <span className="font-medium text-[#15AF63] flex justify-center items-center"><FaLongArrowAltUp />{shortMessage}</span>
+                        <p>
+                            {message} | <span className="font-medium text-[#15AF63] w-max flex justify-center items-center"><FaLongArrowAltUp />{shortMessage}</span>
                         </p>
                     </div>
                 </div>
                 {/* Contraction Card */}
-                <div className="w-[380px] md:w-[400px] h-[300px] md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 flex-shrink-0">
+                <div className="w-[380px] md:w-[400px] h-max md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4">
                     <div className="flex justify-between">
                         <span className="flex items-center gap-2 text-[18px] font-medium">
                             Contractions
@@ -102,13 +102,13 @@ export const MotherSnapshot = () => {
                         <MotherContractionChart />
                     </div>
                      <div>
-                        <p className="flex">
-                            {contractionMessage} | <span className="font-medium text-[#15AF63] flex justify-center items-center"><FaLongArrowAltUp />{shortContractionMessage}</span>
+                        <p >
+                            {contractionMessage} | <span className="font-medium text-[#15AF63] w-max flex justify-center items-center"><FaLongArrowAltUp />{shortContractionMessage}</span>
                         </p>
                     </div>
                 </div>
                 {/* Cervical Dialation Card */}
-                <div className="w-[380px] md:w-[400px] h-[300px] md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4 flex-shrink-0">
+                <div className="w-[380px] md:w-[400px] h-max md:h-[400px] rounded-xl bg-white hover:shadow-md border border-gray-200 p-4">
                     <div className="flex justify-between">
                         <span className="flex items-center gap-2 text-[18px] font-medium">
                             Cervical Dialation
@@ -139,8 +139,8 @@ export const MotherSnapshot = () => {
                         <MotherCervicalDialationChart />
                     </div>
                     <div>
-                        <p className="flex">
-                            {cervicalDilationMessage} | <span className="font-medium text-[#15AF63] flex justify-center items-center"><FaLongArrowAltUp />{shortCervicalDilationMessage}</span>
+                        <p>
+                            {cervicalDilationMessage} | <span className="font-medium text-[#15AF63] w-max flex justify-center items-center"><FaLongArrowAltUp />{shortCervicalDilationMessage}</span>
                         </p>
                     </div>
                 </div>
