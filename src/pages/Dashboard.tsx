@@ -48,14 +48,14 @@ const Dashboard = () => {
 	}
 
 	return (
-		<div className="w-full flex flex-col gap-4 pt-4 px-4">
+		<div className="w-full flex flex-col gap-4 py-4 px-4">
 			<div className="w-full h-max flex justify-between items-center">
 				<div>
 					<h1 className="capitalize font-medium text-[18px] md:text-[36px]">Hello {trimmedName[0]} 👋</h1>
 					<span className="text-gray-600 text-[12px] md:text-[14px]">{message}</span>
 				</div>
 				<div className="w-max h-10 rounded-lg">
-					<button className="w-full text-[12px] md:text-[14px] h-full gap-2 px-2 rounded-lg text-white font-medium flex border-2 border-green-700 justify-center items-center bg-green-600 active:scale-90 duration-200 ease-in-out cursor-pointer " onClick={() => {window.alert("Data Shared!")}}>Share Data <BsSend className="text-white font-bold" />
+					<button className="flex gap-1 items-center px-2 text-[12px] md:text-[16px] md:px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" onClick={() => {window.alert("Data Shared!")}}>Share Data <BsSend className="text-white font-bold" />
 					</button>
 				</div>
 			</div>
@@ -68,8 +68,8 @@ const Dashboard = () => {
 			<div>
 				<Calender />
 			</div>
-			<div className="h-[500px] border">
-				<DataManagement />
+			<div className="h-max">
+				<DataManagement  />
 			</div>
 		</div>
 	);
