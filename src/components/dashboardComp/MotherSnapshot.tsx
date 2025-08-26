@@ -66,7 +66,7 @@ export const MotherSnapshot = () => {
                         <MotherHeartBeatChart />
                     </div>
                     <div>
-                        <p>
+                        <p className="md:flex">
                             {message} | <span className="font-medium text-[#15AF63] w-max flex justify-center items-center"><FaLongArrowAltUp />{shortMessage}</span>
                         </p>
                     </div>
@@ -102,7 +102,7 @@ export const MotherSnapshot = () => {
                         <MotherContractionChart />
                     </div>
                     <div>
-                        <p >
+                        <p className="md:flex">
                             {contractionMessage} | <span className="font-medium text-[#15AF63] w-max flex justify-center items-center"><FaLongArrowAltUp />{shortContractionMessage}</span>
                         </p>
                     </div>
@@ -139,7 +139,7 @@ export const MotherSnapshot = () => {
                         <MotherCervicalDialationChart />
                     </div>
                     <div>
-                        <p>
+                        <p className="md:flex">
                             {cervicalDilationMessage} | <span className="font-medium text-[#15AF63] w-max flex justify-center items-center"><FaLongArrowAltUp />{shortCervicalDilationMessage}</span>
                         </p>
                     </div>
