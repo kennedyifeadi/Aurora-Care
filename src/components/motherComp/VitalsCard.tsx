@@ -1,6 +1,6 @@
 import { RiHeartPulseLine } from "react-icons/ri";
 import { FaTemperatureThreeQuarters } from "react-icons/fa6";
-import { CiHeart } from "react-icons/ci";
+import { FaRegHeart } from "react-icons/fa";
 import { RiLungsLine } from "react-icons/ri";
 import { BiTargetLock } from "react-icons/bi";
 import { FaCircleCheck } from "react-icons/fa6";
@@ -33,7 +33,7 @@ export const VitalsCard = () => {
   };
 
   const icons = {
-    heartRate:  <CiHeart />,
+    heartRate:  <FaRegHeart />,
     bloodPressure: <RiHeartPulseLine />,
     temperature: <FaTemperatureThreeQuarters />,
     oxygenSaturation: <RiLungsLine />,
