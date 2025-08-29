@@ -16,7 +16,7 @@ export const TopNav = () => {
   useEffect(() => {
       const currentDate = new Date().toLocaleDateString();
       setCurrentDate(currentDate);
-  }, []);
+6  }, []);
 
   return (
     <div className="w-full h-[8%] border-b border-gray-200 flex items-center justify-between px-4 relative">
