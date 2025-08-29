@@ -130,10 +130,10 @@ export const ProfileCard: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md bg-white rounded-2xl shadow-lg overflow-hidden p-4">
+    <div className="w-md bg-white rounded-2xl shadow-lg overflow-hidden p-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
-        <h1 className="text-lg font-semibold">Mother's Profile</h1>
+        <h1 className="text-[24px] font-bold">Mother's Profile</h1>
       </div>
 
       {/* Profile Section */}
