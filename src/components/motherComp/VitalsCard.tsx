@@ -72,7 +72,7 @@ export const VitalsCard = () => {
       </div>
       <div className="p-4 bg-gradient-to-r from-[#f0fdf5] to-[#eff6fe] flex items-center rounded-xl border border-[#dbfae8] gap-2">
         <span className="text-[18px] text-[#166534]"><RiShieldCheckFill /></span>
-        <span className="font-medium text-[18px] text-[#166534]">All critical vitals within normal range</span>
+        <span className="font-medium md:text-[18px] text-[#166534] text-[14px]">All critical vitals within normal range</span>
       </div>
     </div>
   )
