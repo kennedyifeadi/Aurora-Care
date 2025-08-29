@@ -43,7 +43,7 @@ export const VitalsCard = () => {
   return (
     <div className="flex w-md flex-col gap-4 p-4 rounded-lg shadow-md bg-white">
       <div className="flex w-full">
-        <h1 className="text-[24px] font-bold">Vitals Summary</h1>
+        <h1 className="text-[20px] md:text-[24px] font-bold">Vitals Summary</h1>
       </div>
       <div className="gap-2 flex flex-col">
         {

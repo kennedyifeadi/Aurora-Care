@@ -8,7 +8,12 @@ export const Mother = () => {
         <ProfileCard />
         <VitalsCard />
       </div>
-      <div></div>
+      <div className="flex flex-col flex-wrap gap-4">
+        <h1 className="text-[20px] md:text-[24px] font-bold">Real-Time Vitals Monitoring</h1>
+        <div>
+
+        </div>
+      </div>
       <div></div>
       <div></div>
       <div></div>
