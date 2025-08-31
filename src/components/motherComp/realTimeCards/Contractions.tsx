@@ -66,7 +66,7 @@ export const ContractionsDisplay: React.FC<ContractionsDisplayProps> = ({
   const currentStatus = determineStatus();
 
   return (
-    <div className={`bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[300px] transition-all duration-300 ${isContracting ? 'ring-2 ring-pink-300 bg-pink-50' : ''}`}>
+    <div className={`bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[350px] transition-all duration-300 ${isContracting ? 'ring-2 ring-pink-300 bg-pink-50' : ''}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">

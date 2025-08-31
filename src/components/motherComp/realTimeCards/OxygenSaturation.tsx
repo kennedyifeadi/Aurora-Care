@@ -49,7 +49,7 @@ export const OxygenSaturationDisplay: React.FC<OxygenSaturationDisplayProps> = (
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[300px]">
+    <div className="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[350px]">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">

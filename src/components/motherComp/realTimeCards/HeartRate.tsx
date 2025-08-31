@@ -76,7 +76,7 @@ export const HeartRateDisplay: React.FC<HeartRateDisplayProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[300px]">
+    <div className="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[350px]">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -102,7 +102,7 @@ export const HeartRateDisplay: React.FC<HeartRateDisplayProps> = ({
             key={index}
             className="bg-pink-400 rounded-sm transition-all duration-800 ease-in-out"
             style={{
-              height: `${(height / 100) * 200}px`,
+              height: `${(height / 100) * 150}px`,
               width: '8px',
               minHeight: '24px',
             }}

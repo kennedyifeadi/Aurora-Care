@@ -57,7 +57,7 @@ export const TemperatureDisplay: React.FC<TemperatureDisplayProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[300px]">
+    <div className="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-[350px]">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <FaTemperatureThreeQuarters className="w-4 h-4 text-orange-500" />
