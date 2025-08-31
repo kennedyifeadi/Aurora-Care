@@ -1,3 +1,4 @@
+import { PainAssessmentDisplay } from "../components/motherComp/ComfortAssessmentCard"
 import { ProfileCard } from "../components/motherComp/ProfileCard"
 import { BloodPressureDisplay } from "../components/motherComp/realTimeCards/BloodPressure"
 import { CervicalDilationDisplay } from "../components/motherComp/realTimeCards/CervicalDilation"
@@ -29,7 +30,9 @@ export const Mother = () => {
           </div>
         </div>
       </div>
-      <div></div>
+      <div className="flex">
+        <PainAssessmentDisplay initialPainLevel={5} />
+      </div>
       <div></div>
       <div></div>
     </div>
