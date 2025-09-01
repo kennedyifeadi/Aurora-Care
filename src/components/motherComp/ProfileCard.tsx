@@ -2,22 +2,26 @@ import React, { useState, useRef } from 'react';
 import { Phone, Plus, Clock, Download } from 'lucide-react';
 
 interface UserData {
-  name?: string;
-  age?: number;
+  fullName?: string;
+  age?: number | string;
   bloodType?: string;
   patientId?: string;
   gravida?: string;
   para?: string;
-  gestationalAge?: number; // in days
+  gravidaPara?: string;
+  gestationalAge?: number | string; // in days
   expectedDueDate?: string;
-  riskLevel?: 'High-Risk' | 'Medium-Risk' | 'Low-Risk';
+  dueDate?: string;
+  riskLevel?: 'High-Risk' | 'Medium-Risk' | 'Low-Risk' | string;
   deliveryPlan?: string;
-  conditions?: string[];
-  allergies?: string[];
-  medications?: string[];
+  conditions?: string[] | string;
+  allergies?: string[] | string;
+  medications?: string[] | string;
   assignedDoctor?: string;
+  doctorEmail?: string;
   emergencyContact?: string;
   emergencyContactRelation?: string;
+  emergencyRelationship?: string;
   profileImage?: string;
   notes?: Note[];
 }
@@ -29,27 +33,17 @@ interface Note {
 }
 
 export const ProfileCard: React.FC = () => {
-  // Default user data with fallback values
-  const [userData, setUserData] = useState<UserData>({
-    name: 'ken',
-    age: 29,
-    bloodType: 'O+',
-    patientId: 'MC-2024-0847',
-    gravida: 'G3',
-    para: 'P2',
-    gestationalAge: 212, // 212 days = 30 weeks, 2 days
-    expectedDueDate: 'May 8, 2026',
-    riskLevel: 'High-Risk',
-    deliveryPlan: 'Vaginal Delivery',
-    conditions: ['Gestational Diabetes', 'Mild Hypertension'],
-    allergies: ['Penicillin', 'Latex'],
-    medications: ['Prenatal Vitamins', 'Iron Supplement', 'Folic Acid'],
-    assignedDoctor: 'Dr. Sarah Chen',
-    emergencyContact: 'John Johnson',
-    emergencyContactRelation: 'Husband',
-    profileImage: '',
-    notes: []
-  });
+  // Get user data from localStorage
+  const localUserData = typeof window !== 'undefined' ? localStorage.getItem('userData') : null;
+  const userData: UserData = localUserData ? JSON.parse(localUserData) : {};
+
+  // Helper to handle string or array for allergies/conditions/medications
+  const toArray = (val: any) => {
+    if (!val) return [];
+    if (Array.isArray(val)) return val;
+    if (typeof val === 'string') return val.split(',').map((v) => v.trim()).filter(Boolean);
+    return [];
+  };
 
   const [showNoteModal, setShowNoteModal] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
@@ -57,23 +51,23 @@ export const ProfileCard: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Convert gestational age from days to weeks and days
-  const getGestationalAgeDisplay = (days: number = 0) => {
-    const weeks = Math.floor(days / 7);
-    const remainingDays = days % 7;
+  const getGestationalAgeDisplay = (days: any = 0) => {
+    const numDays = Number(days) || 0;
+    const weeks = Math.floor(numDays / 7);
+    const remainingDays = numDays % 7;
     return `${weeks} weeks, ${remainingDays} days`;
   };
 
-  // Handle image upload
+  // Handle image upload (update localStorage)
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageData = e.target?.result as string;
-        setUserData(prev => ({
-          ...prev,
-          profileImage: imageData
-        }));
+        const updated = { ...userData, profileImage: imageData };
+        localStorage.setItem('userData', JSON.stringify(updated));
+        window.location.reload(); // reload to reflect change
       };
       reader.readAsDataURL(file);
     }
@@ -84,7 +78,7 @@ export const ProfileCard: React.FC = () => {
     window.location.href = 'tel:+1234567890';
   };
 
-  // Handle add note
+  // Handle add note (update localStorage)
   const handleAddNote = () => {
     if (newNote.trim()) {
       const note: Note = {
@@ -92,28 +86,29 @@ export const ProfileCard: React.FC = () => {
         content: newNote.trim(),
         timestamp: new Date().toLocaleString()
       };
-      
-      setUserData(prev => ({
-        ...prev,
-        notes: [...(prev.notes || []), note]
-      }));
-      
+      const updatedNotes = [...(userData.notes || []), note];
+      const updated = { ...userData, notes: updatedNotes };
+      localStorage.setItem('userData', JSON.stringify(updated));
       setNewNote('');
       setShowNoteModal(false);
+      window.location.reload(); // reload to reflect change
     }
   };
 
   // Export notes
   const handleExportNotes = () => {
-    const notesText = userData.notes?.map(note => 
-      `[${note.timestamp}]\n${note.content}\n\n`
+    const notesText = userData.notes?.map((note: Note) => 
+      `[${note.timestamp}]
+${note.content}
+
+`
     ).join('') || 'No notes available.';
     
     const blob = new Blob([notesText], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${userData.name || 'patient'}_notes.txt`;
+    a.download = `${userData.fullName || 'patient'}_notes.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -145,7 +140,7 @@ export const ProfileCard: React.FC = () => {
                 <img src={userData.profileImage} alt="Profile" className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full bg-[#d87cdc] flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">{userData.name?.[0]?.toUpperCase() || 'P'}</span>
+                  <span className="text-2xl font-bold text-white">{userData.fullName?.[0]?.toUpperCase() || 'P'}</span>
                 </div>
               )}
             </div>
@@ -164,13 +159,13 @@ export const ProfileCard: React.FC = () => {
             />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-semibold text-gray-900">{userData.name || 'Unknown'}</h2>
+            <h2 className="text-xl font-semibold text-gray-900">{userData.fullName || 'Unknown'}</h2>
             <p className="text-[10px] md:text-sm text-gray-600">Age: {userData.age || 'Unknown'}</p>
             <p className="text-[10px] md:text-sm text-gray-600">Blood Type: {userData.bloodType || 'Unknown'}</p>
           </div>
           <div className="text-right text-[10px] md:text-sm text-gray-600">
             <p>Patient ID: {userData.patientId || 'Unknown'}</p>
-            <p>Gravida/Para: {userData.gravida || 'G0'}{userData.para || 'P0'}</p>
+            <p>Gravida/Para: {userData.gravidaPara || 'Unknown'}</p>
           </div>
         </div>
 
@@ -184,7 +179,7 @@ export const ProfileCard: React.FC = () => {
           </div>
           <div>
             <h3 className="text-[10px] md:text-sm font-medium text-[#7d3bb3] mb-1">Expected Due Date</h3>
-            <p className="text-[12px] md:text-sm font-semibold text-[#7f22ce]">{userData.expectedDueDate || 'Unknown'}</p>
+            <p className="text-[12px] md:text-sm font-semibold text-[#7f22ce]">{userData.dueDate || 'Unknown'}</p>
           </div>
           <div>
             <h3 className="text-[10px] md:text-sm font-medium text-[#7d3bb3] mb-1">Risk Level</h3>
@@ -203,13 +198,13 @@ export const ProfileCard: React.FC = () => {
           <div>
             <h3 className="text-[12px] font-medium mb-2">Conditions</h3>
             <div className="space-y-1">
-              {(userData.conditions || []).slice(0, 2).map((condition, index) => (
+              {(toArray(userData.conditions).slice(0, 2)).map((condition: string, index: number) => (
                 <p key={index} className="text-[8px] md:text-xs bg-[#fef2f2] p-2 rounded-full text-[#c0322f] ">{condition}</p>
               ))}
-              {(userData.conditions?.length || 0) > 2 && (
-                <p className="text-[8px] md:text-xs text-gray-500 text-end">+{(userData.conditions?.length || 0) - 2} more</p>
+              {(toArray(userData.conditions).length > 2) && (
+                <p className="text-[8px] md:text-xs text-gray-500 text-end">+{toArray(userData.conditions).length - 2} more</p>
               )}
-              {(!userData.conditions || userData.conditions.length === 0) && (
+              {(toArray(userData.conditions).length === 0) && (
                 <p className="text-[8px] md:text-xs text-gray-400">None</p>
               )}
             </div>
@@ -217,13 +212,13 @@ export const ProfileCard: React.FC = () => {
           <div>
             <h3 className="text-[12px] font-medium mb-2">Allergies</h3>
             <div className="space-y-1">
-              {(userData.allergies || []).slice(0, 2).map((allergy, index) => (
+              {(toArray(userData.allergies).slice(0, 2)).map((allergy: string, index: number) => (
                 <p key={index} className="text-[8px] md:text-xs bg-[#fff7ed] p-2 rounded-full text-[#c5523a] ">{allergy}</p>
               ))}
-              {(userData.allergies?.length || 0) > 2 && (
-                <p className="text-[8px] md:text-xs text-gray-500 text-end">+{(userData.allergies?.length || 0) - 2} more</p>
+              {(toArray(userData.allergies).length > 2) && (
+                <p className="text-[8px] md:text-xs text-gray-500 text-end">+{toArray(userData.allergies).length - 2} more</p>
               )}
-              {(!userData.allergies || userData.allergies.length === 0) && (
+              {(toArray(userData.allergies).length === 0) && (
                 <p className="text-[8px] md:text-xs text-gray-400">None</p>
               )}
             </div>
@@ -231,13 +226,13 @@ export const ProfileCard: React.FC = () => {
           <div>
             <h3 className="text-[12px] font-medium mb-2">Medications</h3>
             <div className="space-y-1">
-              {(userData.medications || []).slice(0, 2).map((medication, index) => (
+              {(toArray(userData.medications).slice(0, 2)).map((medication: string, index: number) => (
                 <p key={index} className="text-[8px] md:text-xs bg-[#eff6ff] p-2 rounded-full text-[#2256db] ">{medication}</p>
               ))}
-              {(userData.medications?.length || 0) > 2 && (
-                <p className="text-[8px] md:text-xs text-gray-500 text-end">+{(userData.medications?.length || 0) - 2} more</p>
+              {(toArray(userData.medications).length > 2) && (
+                <p className="text-[8px] md:text-xs text-gray-500 text-end">+{toArray(userData.medications).length - 2} more</p>
               )}
-              {(!userData.medications || userData.medications.length === 0) && (
+              {(toArray(userData.medications).length === 0) && (
                 <p className="text-[8px] md:text-xs text-gray-400">None</p>
               )}
             </div>
@@ -250,11 +245,11 @@ export const ProfileCard: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="text-[10px] md:text-sm text-gray-600">Assigned Doctor</p>
-              <p className="text-[10px] md:text-sm font-semibold text-blue-700">{userData.assignedDoctor || 'Dr. Unknown'}</p>
+              <p className="text-[10px] md:text-sm font-semibold text-blue-700">{userData.doctorEmail || 'Dr. Unknown'}</p>
             </div>
             <div>
               <p className="text-[10px] md:text-sm text-gray-600">Emergency Contact</p>
-              <p className="text-[10px] md:text-sm font-semibold text-green-700">{userData.emergencyContact || 'Unknown'} ({userData.emergencyContactRelation || 'Unknown'})</p>
+              <p className="text-[10px] md:text-sm font-semibold text-green-700">{userData.emergencyContact || 'Unknown'} ({userData.emergencyRelationship || 'Unknown'})</p>
             </div>
           </div>
         </div>
@@ -332,7 +327,7 @@ export const ProfileCard: React.FC = () => {
             <div className="flex-1 overflow-y-auto mb-4">
               {userData.notes && userData.notes.length > 0 ? (
                 <div className="space-y-3">
-                  {userData.notes.map((note) => (
+                  {userData.notes.map((note: Note) => (
                     <div key={note.id} className="border border-gray-200 rounded-lg p-3">
                       <p className="text-[10px] md:text-xs text-gray-500 mb-2">{note.timestamp}</p>
                       <p className="text-[10px] md:text-sm text-gray-900">{note.content}</p>
