@@ -8,43 +8,16 @@ import { BsSend } from "react-icons/bs";
 const Dashboard = () => {
 	const userData = localStorage.getItem("userData");
 	const parsedUserData = userData ? JSON.parse(userData) : null;
-	const fullName = parsedUserData ? parsedUserData[0] : 'User';
+	const fullName = parsedUserData?.fullName || 'User';
 	const trimmedName = fullName.trim().split(" ");
-	const pregnancyMonths = parsedUserData ? parsedUserData[1] : '0';
+	const gestationalDays = parsedUserData?.gestationalAge ? Number(parsedUserData.gestationalAge) : 0;
+	const weeks = Math.floor(gestationalDays / 7);
+	const days = gestationalDays % 7;
 	let message = '';
-	switch (pregnancyMonths) {
-		case '1':
-			message = `you are in Week 4 of your pregnancy.`;
-			break;
-		case '2':
-			message = `you are in Week 8 of your pregnancy.`;
-			break;
-		case '3':
-			message = `you are in Week 12 of your pregnancy.`;
-			break;
-		case '4':
-			message = `you are in Week 16 of your pregnancy.`;
-			break;
-		case '5':
-			message = `you are in Week 20 of your pregnancy.`;
-			break;
-		case '6':
-			message = `you are in Week 24 of your pregnancy.`;
-			break;
-		case '7':
-			message = `you are in Week 28 of your pregnancy.`;
-			break;
-		case '8':
-			message = `you are in Week 32 of your pregnancy.`;
-			break;
-		case '9':
-			message = `you are in Week 36 of your pregnancy.`;
-			break;
-		case '10':
-			message = `you are in Week 40 of your pregnancy.`;
-			break;
-		default:
-			break;
+	if (gestationalDays > 0) {
+		message = `You are in Week ${weeks}${days > 0 ? `, Day ${days}` : ''} of your pregnancy.`;
+	} else {
+		message = 'Gestational age not set.';
 	}
 
 	return (
