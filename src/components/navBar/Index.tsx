@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { SearchBar } from "./SearchBar";
 import { RiNotification2Line } from "react-icons/ri";
@@ -9,14 +8,15 @@ export const TopNav = () => {
   const user = localStorage.getItem("userData");
   const [currentDate, setCurrentDate] = useState("");
   const userData = user ? JSON.parse(user) : null;
-  const initials = userData ? userData[0].trim().split(" ") : ['U', 'U'];
-  const fullName = userData ? userData[0] : 'User';
+  const fullName = userData?.fullName || 'User';
+  const initialsArr = fullName.trim().split(" ");
+  const initials = [initialsArr[0], initialsArr[1] || ''];
   const truncatedName = fullName.length > 10 ? fullName.slice(0, 10) + '...' : fullName;
   const { openSidebar, isOpen } = useSidebar();
   useEffect(() => {
       const currentDate = new Date().toLocaleDateString();
       setCurrentDate(currentDate);
-6  }, []);
+  }, []);
 
   return (
     <div className="w-full h-[8%] border-b border-gray-200 flex items-center justify-between px-4 relative">
