@@ -38,9 +38,9 @@ export const ProfileCard: React.FC = () => {
   const userData: UserData = localUserData ? JSON.parse(localUserData) : {};
 
   // Helper to handle string or array for allergies/conditions/medications
-  const toArray = (val: any) => {
+  const toArray = (val: unknown): string[] => {
     if (!val) return [];
-    if (Array.isArray(val)) return val;
+    if (Array.isArray(val)) return val.map((v) => String(v).trim()).filter(Boolean);
     if (typeof val === 'string') return val.split(',').map((v) => v.trim()).filter(Boolean);
     return [];
   };
@@ -51,7 +51,7 @@ export const ProfileCard: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Convert gestational age from days to weeks and days
-  const getGestationalAgeDisplay = (days: any = 0) => {
+  const getGestationalAgeDisplay = (days: number | string = 0) => {
     const numDays = Number(days) || 0;
     const weeks = Math.floor(numDays / 7);
     const remainingDays = numDays % 7;
