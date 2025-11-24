@@ -7,7 +7,6 @@ import { CiGrid42 } from "react-icons/ci";
 import { LuBaby } from "react-icons/lu";
 import { GrUserFemale } from "react-icons/gr";
 import { MdOutlineDateRange } from "react-icons/md";
-import { LuHistory } from "react-icons/lu";
 import AuroraBirth from "/Aurora-Care.png";
 import { BsReverseLayoutSidebarReverse } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
@@ -88,11 +87,6 @@ export const SideBar = () => {
       icon: <MdOutlineDateRange size={20} />,
       link: "/plan"
     },
-    {
-      label: "History",
-      icon: <LuHistory size={20} />,
-      link: "/history"
-    }
   ];
 
   const sidebarBase = "bg-white flex flex-col gap-6 justify-between border-r border-gray-200 px-2 transition-all duration-300";
